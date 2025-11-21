@@ -1,268 +1,198 @@
+# SentriAI – Product Requirements Document (PRD)
 
-Product Requirements Document (PRD)  SentriAI.
+## Product Overview
 
+SentriAI is a lightweight, AI-driven system designed to identify students who are at risk of dropping out from school. The platform combines synthetic data, predictive scoring, and a simple admin dashboard to help schools intervene proactively.
 
-Product Overview
-SentriAI is a lightweight AI-driven system designed to identify students who are at risk of dropping out from school. The platform combines synthetic data, predictive scoring, and a simple admin-facing dashboard to help schools proactively intervene before disengagement escalates.
+**MVP simulates:**
+- AI-generated predictions  
+- Risk-level explanations  
+- Alerts  
+- Intervention suggestions  
 
-The MVP simulates:
-- AI-generated predictions
-- Risk-level explanations
-- Alerts
-- Intervention suggestions
+Built using `Lovable`, `Glide/Airtable AI`, with optional `Figma` polish, SentriAI delivers both a functional prototype and visually compelling design assets.
 
-Built using Lovable, Glide/Airtable AI, and optional Figma polish, the system delivers both a functioning prototype and visually compelling design assets.
+---
 
+## Problem Statement
 
-Problem Statement
 Schools consistently lose students due to:
 - Poor engagement
 - Low attendance
 - Academic decline
 - Behavioral instability
-  
-But most institutions lack a simple, affordable tool that flags risk early and gives actionable recommendations.
-SentriAI solves that gap by providing a low-code, fast-to-build AI simulation to demonstrate how early-warning systems work.
 
+Most institutions lack a simple, affordable tool to flag risk early and provide actionable recommendations.
 
-Goals & Success Criteria
+**SentriAI solves this gap** by offering a low-code, fast-to-build AI simulation to demonstrate an early-warning system.
 
-Primary Goals
-- Detect students with Low / Moderate / High dropout risk.
-- Give administrators clear visibility into risk trends.
-- Provide “reason for risk” and recommended interventions.
-- Demonstrate how AI can support student retention.
+---
 
+## Goals & Success Criteria
 
-Success Indicators
-- Working prototype that displays accurate simulated predictions.
-- Admin dashboard showing risk distribution and student profiles.
-- Clean landing page explaining the system and value.
-- Presentation-ready visuals for demo or pitch.
+### Primary Goals
+- Detect students with Low / Moderate / High dropout risk
+- Give administrators visibility into risk trends
+- Provide “reason for risk” and recommended interventions
+- Show how AI supports student retention
 
+### Success Indicators
+- Working prototype with accurate simulated predictions
+- Admin dashboard showing risk distribution & student profiles
+- Clean landing page explaining system and value
+- Presentation-ready visuals for demo or pitch
 
+---
 
-Target Users
-- Admin
-- School administrators
-- Guidance counselors
-- Learning coordinators
+## Target Users
 
-Needs: visibility, clarity, proactive alerts.
-(Optional Future) Student + Parent Portals
-Not included in MVP.
+- Administrators  
+- School administrators  
+- Guidance counselors  
+- Learning coordinators  
 
+**Needs:** Visibility, clarity, proactive alerts
 
+> _(Optional Future)_  
+> Student & Parent Portals (not included in MVP)
 
-User Persona
-Name: Mrs. Amaka Okorie
-Role: Student Affairs / School Administrator
-Age: 32–40
+---
 
-Background:
-Manages attendance, academic reports, behaviour logs, and parent communication for hundreds of students. Decisions are often manual and time-consuming.
+## User Persona
 
-Goals:
+**Name:** Mrs. Amaka Okorie  
+**Role:** Student Affairs / School Administrator  
+**Age:** 32–40  
+
+**Background:**  
+Manages attendance, academic reports, behavior logs, and parent communication for hundreds of students. Decisions are often manual and time-consuming.
+
+**Goals:**
 - Identify at-risk students early
-- Monitor attendance, behaviour, and performance in one place
+- Monitor attendance, behavior, performance in one place
 - Trigger timely interventions
 - Improve student retention rates
 
-
-Pain Points:
-- Scattered data across multiple systems
-- Early warning signs are easy to miss
-- Reactive intervention instead of proactive
+**Pain Points:**
+- Scattered data across systems
+- Warning signs easy to miss
+- Reactive rather than proactive intervention
 - Difficulty tracking trends over time
 - Relies on manual reviews and intuition
 
-
-Needs:
+**Needs:**
 - Clear risk scores
-- Simple explanations for each flagged student
+- Simple explanations for flagged students
 - Unified dashboard
-- Actionable intervention recommendations
+- Actionable recommendations
 
+---
 
-Quote:
-“Show me which students need attention now — and why.”
+## Core Features (MVP)
 
-
-
-Core Features (MVP)
-A. Landing Page
+### A. Landing Page
 - Overview of the system
 - How risk prediction works
-- Call-to-action to “View Dashboard”
+- Call-to-action: "View Dashboard"
 
-
-B. Admin Dashboard
+### B. Admin Dashboard
 - Total students
 - Risk distribution (Low/Moderate/High)
 - Quick alerts
 - High-risk students overview
 
-
-C. Student List
+### C. Student List
 - Search & filter
 - Risk category badges
 - Key data points (attendance %, GPA, warnings, behavior score)
 
-
-D. Student Profile
+### D. Student Profile
 - Personal details
 - Attendance trend
 - GPA history
 - Behavioral score timeline
 - AI-generated risk level
+- Explanation for prediction (e.g., “attendance dropped 20%, GPA declined”)
 
-
-Explanation for prediction (“because attendance dropped 20%, GPA declined, etc.”)
-
-
-
-E. Risk Score Breakdown
+### E. Risk Score Breakdown
 - Contribution factors
 - Weightings
 - Risk trend over time
 
-
-
-F. Alerts Center
+### F. Alerts Center
 - Students crossing risk thresholds
 - Behavior spikes
 - Sudden drops in performance
 
-
-
-G. Intervention Suggestions
+### G. Intervention Suggestions
 - Personalized action recommendations
 - Parent engagement steps
 - Academic support strategies
 - Follow-up reminders
 
+---
 
+## Workflow / Solution Approach
 
+1. **Simulation + Design Blueprint**
+    - Generate rough UI with Lovable
+    - Mock screens: landing page, dashboard, lists, profiles, alerts
+    - Blueprint before real prototyping
 
-Workflow / Solution Approach
+2. **Create Synthetic Dataset**
+    - Fields: Attendance %, GPA, Behavioral score, Warning count, Parent engagement, Historical trends, Risk level (Low/Moderate/High)
+    - Tools: Mockaroo / ChatGPT table generator
 
-1. Simulation + Design Blueprint
-- Generate rough UI using Lovable
-- Produce mock screens: landing page, dashboard, lists, profiles, alerts, etc.
-- Treat this as the blueprint before real prototyping.
+3. **Build AI Prediction Logic**
+    - Tools: Glide AI, Airtable AI, or Make
+    - Flow: Upload synthetic CSV → AI field predicts risk → Output explanation and score → Export sample predictions
 
+4. **Prototype in Lovable**
+    - Inputs: Synthetic dataset, AI prediction outputs, simulation screens
+    - Lovable handles: App generation, UI, routing, data display, basic rule logic
 
-2. Create Synthetic Dataset
-- Data fields:
-- Attendance %
-- GPA
-- Behavioral score
-- Warning count
-- Parent engagement
-- Historical trends
-- Final risk level (Low/Moderate/High)
+5. **Final Figma Polish (Optional)**
+    - Import Lovable screens
+    - Enhance: Spacing, color, typography
+    - Prepare pitch visuals
 
+6. **Week 1 Deliverables**
+    - Interactive web app
+    - Polished Figma mockups
+    - Landing page
+    - Predictive simulation
+    - Dashboard and student profiles
+    - Shareable demo link
 
-Tools:
+7. **Non-Goals (MVP Scope)**
+    - Real machine learning model
+    - Real student data
+    - Live SMS/email notifications
+    - Student/parent login
+    - Mobile app
 
-Mockaroo OR ChatGPT table generator.
+---
 
+## Risks & Mitigations
 
+| Risk                            | Mitigation                                  |
+|----------------------------------|---------------------------------------------|
+| AI predictions may be inconsistent | Fix dataset ranges, standardize prompts      |
+| Over-complexity                   | Limit MVP to admin only                     |
+| Visual clutter                    | Polish UI in Figma                          |
+| Data realism issues               | Enhance dataset with historic trends        |
 
-3. Build AI Prediction Logic
+---
 
-Tools: Glide AI, Airtable AI, or Make.
+## Tech Stack
 
-Flow:
-- Upload synthetic CSV
-- Use AI field to predict risk
-- Output explanation + numerical score
-- Export sample predictions as JSON/CSV
-
-
-4. Build Prototype in Lovable
-
-Inputs:
-- Synthetic dataset
-- AI prediction outputs
-- Initial simulation screens
-
-
-Lovable handles:
-- App generation
-- UI structure
-- Routing
-- Display of data
-- Simple rule logic
-
-
-5. Final Figma Polish (Optional)
-- Import Lovable screens
-- Enhance spacing, color, typography
-- Prepare pitch-ready visuals
-
-
-6. Week 1 Deliverables
-- Interactive web app
-- Polished Figma mockups
-- Landing page
-- Predictive simulation
-- Dashboard + student profiles
-- Shareable demo link
-
-
-
-7. Non-Goals (Out of Scope for MVP)
-- Real machine learning model
-- Real student data
-- Live SMS/email notifications
-- Student/parent login
-- Mobile app
-
-
-
-Risks & Mitigations
-
-Risk
-Mitigation 
-- AI predictions may be inconsistent
-Fix dataset ranges and standardize prompts
-
-
-- Over-complexity
-Keep MVP limited to admin only
-
-
-- Visual clutter
-Use Figma for final polish
-
-
-- Data realism issues
-Enhance dataset with historical trends
-
-	
-
-
-Tech Stack
 - Lovable – Web app generation
 - Airtable AI / Glide AI – Prediction engine
 - Figma – Visual polish & pitch design
 - ChatGPT / Mockaroo – Synthetic data
 
+---
 
+## Quotes & Additional Notes
 
-
-Team Members 
-
- 1. Ruth Igwe-Oruta 
-2.  Maureen Cheptoo
-3. Olatunji Abdulraheem
-4. Idara Akpan
-5. Akpakpa Rukevwe Mary
-6. Asheson Enneh
-7. ⁠Eno Peters
-8. ⁠Vivian Ibeawuchi
-9. ⁠Nissi Marshall
-10. Precious Babalola
-11. Ja'afar Umar AI-Jenewy
-12. Gold Sani
+> "If I could easily see who needs intervention this week, I’d make fewer manual mistakes and improve student outcomes. But tools are expensive unless you prove the concept first."
