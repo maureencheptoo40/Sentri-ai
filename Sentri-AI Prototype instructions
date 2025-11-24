@@ -1,0 +1,446 @@
+Prototyping Instructions 
+
+Step 0 — Prep Before You Start
+Make sure you have:
+n8n Cloud account (14-day trial) — sign up at https://www.n8n.io/cloud
+Or self host
+
+
+Your synthetic dataset CSV ready (attendance %, GPA, behavior score, etc.)
+
+
+Airtable account with a base ready for the student data
+
+
+Glide or Lovable account ready for dashboards
+
+
+API keys for Airtable and other tools you plan to connect
+
+
+
+Step 1 — Sign Up for n8n Cloud
+Go to n8n Cloud
+
+
+Click Start Free Trial (14 days)
+
+
+Follow the signup process (email / GitHub login)
+
+
+After signing up, you’ll see your workspace dashboard and the editor URL.
+
+
+
+Step 2 — Secure Your Workspace
+On n8n Cloud, your instance is already behind authentication.
+
+
+Note your login credentials; you'll need them to access the editor.
+
+
+
+Step 3  Add Credentials
+Go to Settings → Credentials
+
+
+Add new credentials for the tools you’ll use:
+
+
+Airtable: API key, base ID
+
+
+Google Sheets / Drive (if you want to upload CSVs there)
+
+
+Webhooks / Glide / Lovable: optional for sending processed data
+
+
+Credentials in n8n are securely stored and used in workflow nodes.
+
+Step 4  Upload Synthetic Dataset
+Go to your Airtable base and create a table for student data
+
+
+Columns: student_id, name, attendance_percentage, gpa, behavior_score, warning_count, parent_engagement_level
+
+
+Upload your CSV to Airtable manually, or use n8n Google Sheets node if CSV is hosted in Google Drive
+
+
+This ensures your n8n workflow can pull real data.
+
+Step 5 — Build the n8n Workflow
+Here’s the recommended workflow for SentriAI MVP:
+A) Trigger Node
+Type: Manual Trigger (for testing) or Schedule Trigger (for automatic daily updates)
+
+
+B) Pull Data Node
+Type: Airtable Node → “Read” → select your base and table
+
+
+This fetches all student records for analysis
+
+
+C) Apply Prediction Logic
+Type: Function Node or Code Node (for simulation)
+
+
+Logic example:
+
+
+return items.map(item => {
+  const attendance = parseFloat(item.json.attendance_percentage);
+  const gpa = parseFloat(item.json.gpa);
+  const behavior = parseFloat(item.json.behavior_score);
+
+  let risk = 'Low';
+  if(attendance < 70 || gpa < 2.0 || behavior < 50) risk = 'High';
+  else if(attendance < 85 || gpa < 3.0 || behavior < 70) risk = 'Moderate';
+
+  item.json.ai_risk_level = risk;
+  item.json.risk_explanation = `Attendance: ${attendance}, GPA: ${gpa}, Behavior: ${behavior}`;
+  return item;
+});
+
+D) Send to Dashboard / Lovable
+Use Webhook Node or HTTP Request Node to POST results to Lovable
+
+
+Map ai_risk_level and risk_explanation for each student
+
+
+E) Alerts / Notifications
+Optional: Use Email Node or Slack Node to notify admin if any student is High risk
+
+
+
+Step 6 — Test Workflow
+Run manually first
+
+
+Check the output in n8n → JSON response should have:
+
+
+{
+  "student_id": "S001",
+  "name": "John Doe",
+  "attendance_percentage": 60,
+  "gpa": 2.5,
+  "behavior_score": 65,
+  "ai_risk_level": "High",
+  "risk_explanation": "Attendance: 60, GPA: 2.5, Behavior: 65"
+}
+
+Verify that Lovable / Glide receives the data correctly
+
+
+
+Step 7 — Activate Workflow
+Click Activate → this makes the workflow live
+
+
+If you used Schedule Trigger, it will now run daily/weekly automatically
+
+
+
+Step 8 — Dashboard / Admin View
+In Lovable / Glide:
+
+
+Connect to the webhook or Airtable table
+
+
+Display ai_risk_level with color coding (Low = green, Moderate = yellow, High = red)
+
+
+Show risk_explanation as tooltip or detailed view
+
+
+Now your admin can see which students need attention and why
+
+Step 9 — Optional Enhancements
+Add filters by risk level
+
+
+Generate CSV reports automatically
+
+
+Add parent engagement reminders
+
+
+Track trends over time using charts in Glide / Lovable
+
+
+
+✅ Summary
+n8n Cloud instance (14-day trial)
+
+
+Pull CSV data from Airtable
+
+
+Simulate AI predictions in Function node
+
+
+Send risk data to Lovable / Glide dashboard
+
+
+Optional alerts via Email / Slack
+
+
+Activate workflow for ongoing automation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+🟦 Problem Space
+Rising dropout rates
+
+
+No early-warning systems
+
+
+Data is scattered
+
+
+Late interventions
+
+
+Manual monitoring
+
+
+Educators overwhelmed
+
+
+
+🟩 Users
+Admins
+
+
+Teachers
+
+
+Advisors
+
+
+Counselors
+
+
+School Owners
+
+
+
+🟨 Goals
+Predict risk early
+
+
+Centralize student data
+
+
+Show clear explanations
+
+
+Enable interventions
+
+
+Improve retention
+
+
+Simple MVP first
+
+
+
+🟧 Core Features
+Risk scoring
+
+
+Risk levels (Low/Med/High)
+
+
+Explanations
+
+
+Student profiles
+
+
+Attendance trends
+
+
+GPA trends
+
+
+Behavior trends
+
+
+Alerts center
+
+
+Dashboard
+
+
+CSV upload
+
+
+
+🟪 Data Fields
+Name
+
+
+Student ID
+
+
+Attendance %
+
+
+GPA
+
+
+Behavior score
+
+
+Parent engagement
+
+
+Warning count
+
+
+History logs
+
+
+
+🟫 Tech Stack
+Airtable
+
+
+Lovable
+
+
+n8n
+
+
+Glide (optional)
+
+
+Synthetic CSV
+
+
+
+🟧 AI Logic
+Attendance drop
+
+
+GPA decline
+
+
+Behavior anomalies
+
+
+Weighted score
+
+
+Risk explanation
+
+
+
+🟦 n8n Nodes
+Trigger
+
+
+Read CSV
+
+
+Clean data
+
+
+IF (rules)
+
+
+Function (scoring)
+
+
+AI text node
+
+
+Airtable update
+
+
+Alerts node
+
+
+Cron (daily)
+
+
+
+🟨 UX Screens
+Dashboard
+
+
+Student list
+
+
+Student profile
+
+
+Alerts
+
+
+Interventions
+
+
+Settings
+
+
+
+🟩 MVP Scope
+Synthetic dataset
+
+
+Basic scoring
+
+
+CSV import
+
+
+Airtable setup
+
+
+n8n workflow
+
+
+Lovable dashboard
+
+
+
+🟪 Future Ideas
+Real ML model
+
+
+Parent portal
+
+
+SMS/email alerts
+
+
+Multi-school version
+
+
+API live data
+
+
+
+
